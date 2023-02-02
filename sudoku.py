@@ -4,15 +4,19 @@ N = sudoku
 
 import random
 
-list = [i for i in range(1, N+1)]
+import math
+
+k = math.sqrt(N)
+
+list = []
+for i in range(1,N+1):
+    list.append(i)
+    
 print(list)
 
 dictionaries = {}
 for i in range (1,N+1):
     dictionaries["column"+str(i)] = random.sample(list, len(list))
+
 print(dictionaries)
-
-import math
-
-small_squares = math.sqrt(N)
 
