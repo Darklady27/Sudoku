@@ -16,7 +16,12 @@ print(list)
 
 dictionaries = {}
 for i in range (1,N+1):
-    dictionaries["column"+str(i)] = random.sample(list, len(list))
+    dictionaries["row"+str(i)] = random.sample(list, len(list))
 
-print(dictionaries)
+print(dictionaries) 
+for keys in dictionaries.values():
+    print(' '.join([ str(s) for s in keys]))
 
+#sprawdzenie
+#dziury
+#wpisywanie do dziurek
