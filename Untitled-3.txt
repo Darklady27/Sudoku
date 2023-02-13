@@ -1,0 +1,66 @@
+sudoku = int(input("Enter numbers from 2 to N:")) #czy da sie inaczej, zeby 0 i nieparyste zawsze bylo error??
+print("Rozmiar planszy:", str(sudoku), "x", str(sudoku))
+N = sudoku
+list = []
+for i in range(1,N+1):
+    list.append(i)
+    
+import random
+    
+print(list)
+dictionaries = {}
+for i in range (1,N+1):
+    dictionaries["row"+str(i)] = random.sample(list, len(list))
+
+print(dictionaries) 
+for v in dictionaries.values():
+    print(' '.join([ str(s) for s in v]))
+
+wiersze= dictionaries.values()
+lista_kolumn =[]
+nowe_wiersze =[]
+def sprawdz_plansze(N, wiersze):
+    for i in range(N):
+        print(f"Oto wartosci z kolumny {i}:")
+        kolumna = []
+        lista_do_wierszy =[]
+        for wiersz in wiersze:
+            print(wiersz[i])
+            kolumna.append(wiersz[i])
+        for lista in lista_kolumn:
+            print(lista[i])
+            lista_do_wierszy.append(lista[i]) 
+        while len(set(kolumna)) and len(set(lista_do_wierszy)) != len(list): 
+            sprawdz_kolumny
+            sprawdz_wiersze
+
+
+def sprawdz_kolumny(N,kolumna)
+    while len(set(kolumna)) != len(list):
+        for nr_wiersza, wartosc_w_kolumnie in enumerate(kolumna):
+            for k in range(nr_wiersza + 1, N):  
+                if  kolumna[k] == wartosc_w_kolumnie:
+                    while kolumna[k] == wartosc_w_kolumnie and kolumna[k] in kolumna:
+                        kolumna[k] =random.choice(list)
+    print(kolumna)
+    lista_kolumn.append(kolumna)
+    return "super kolumna"
+
+
+print(sprawdz_plansze(N, wiersze))
+
+def sprawdz_wiersze(N, lista_do_wierszy)
+    while len(set(lista_do_wierszy)) != len(list):
+            for numer, wartosc_w_wierszu in enumerate(lista_do_wierszy):
+                for k in range(numer + 1, N):  
+                    if  lista_do_wierszy[k] == wartosc_w_wierszu:
+                        while lista_do_wierszy[k] == wartosc_w_wierszu and lista_do_wierszy[k] in lista_do_wierszy:
+                            lista_do_wierszy[k] =random.choice(list)
+    nowe_wiersze.append(lista_do_wierszy)
+    
+    print(nowe_wiersze)
+    return "super wiersze"
+        
+print(lista_kolumn)
+print(nowe_wiersze)
+sprawdz_plansze(N, wiersze)
