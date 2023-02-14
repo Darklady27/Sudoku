@@ -6,7 +6,7 @@ for i in range(1,N+1):
     list.append(i)
     
 import random
-    
+
 print(list)
 dictionaries = {}
 for i in range (1,N+1):
