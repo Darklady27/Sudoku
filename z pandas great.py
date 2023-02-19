@@ -89,11 +89,34 @@ def sprawdz_wiersz(data: np.ndarray, nr_wiersza: int):
         return False
 
 
+class MyException(Exception):
+    ...
+
 def plansza():
-    lista = [i for i in range(1, N+1)]
-    lista_list =[random.sample(lista,len(lista)) for _ in range(N)]
-    
-    return np.array(lista_list)
+    n = int(math.sqrt(N))
+    licz_od_nowa = True
+    while licz_od_nowa:
+        try:
+            data = np.zeros((N, N), dtype=int)
+            zbior = {i for i in range(1, N+1)}
+            data[0,0] = random.choice(list(zbior))
+            for i in range(N):
+                for j in range(N):
+                    kolumna = set(data[:, j]) #ze wszystkich wierszy kolumny j
+                    wiersz = set(data[i,:])
+                    a = i % n
+                    b =j % n
+                    kwadracik = set(data[i-a:(i-a)+n,j-b:(j-b)+n].reshape((-1,)))
+                    dozwolone = zbior - kolumna - wiersz - kwadracik
+                    if len(dozwolone) == 0:
+                        raise MyException("empty set")                    
+                    wybrana_wartosc = random.choice(list(dozwolone))
+                    data[i,j] = wybrana_wartosc
+            licz_od_nowa = False
+        except MyException as e:
+            print(i, j)
+
+    return data
 
 
 def create_sudoku():
@@ -121,6 +144,8 @@ def zamien_odpowiednia_czesc(data, bledny_wiersz, bledna_kolmna):
         data[:,bledna_kolmna] = random.sample(lista,len(lista))
 
 
+d= plansza()
+print_sudoku(d)
 
 create_sudoku()
 
