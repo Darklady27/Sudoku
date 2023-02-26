@@ -14,11 +14,27 @@ import pandas as pd
 n = math.sqrt(N)
 
 
-def print_sudoku(data: np.ndarray):
-    for row in data:
-        for cell in row:
-            print(cell, end=' ')
-        print()
+def print_sudoku(data: np.ndarray): #iteracja poo numpy array idzie po wierszach
+    print('\t\t', end='')
+    for i in range(N):
+        print(f"n{i}", end ='\t')
+    kreski = '-' * (8 * N + 11)
+    print(f"\n{kreski}")
+    for indeks,row in enumerate(data):
+        print(f"Row nr {indeks}",end='    |')
+        print('\t', end='')
+        for cell in row:      
+            if cell == 0:
+                cell = " "
+                print(cell, end='   |\t')
+                
+            else:
+                print(cell, end='   |\t')
+        print(f"\n{kreski}")
+    
+
+
+
 
 def sprawdz_sudoku(data: np.ndarray):
     """
@@ -114,7 +130,7 @@ def plansza():
                     data[i,j] = wybrana_wartosc
             licz_od_nowa = False
         except MyException as e:
-            print(i, j)
+            pass #print(i, j)
 
     return data
 
@@ -128,8 +144,8 @@ def create_sudoku():
         zamien_odpowiednia_czesc(data, bledny_wiersz, bledna_kolmna)
         czy_ok, bledny_wiersz, bledna_kolmna = sprawdz_sudoku(data)
 
-    print(data)  
-    return print("Sudoku ok")
+    return data 
+    #9return print("Sudoku ok")
 
 def zamien_odpowiednia_czesc(data, bledny_wiersz, bledna_kolmna):
     lista = [i for i in range(1, N+1)]
@@ -144,21 +160,29 @@ def zamien_odpowiednia_czesc(data, bledny_wiersz, bledna_kolmna):
         data[:,bledna_kolmna] = random.sample(lista,len(lista))
 
 
-d= plansza()
-print_sudoku(d)
+#d= plansza()
+#print_sudoku(d)
+# lista_do_sudoku = [a]
+# print(lista_do_sudoku)
 
-create_sudoku()
+y = np.array(create_sudoku())
+
+ilosc_pustych_miejsc = int((N*N)/2) 
+
+print(ilosc_pustych_miejsc)
+
+one_D_array = y.flatten()
+lista_do_pustych_miejsc = [i for i in range(N*N)]
+
+puste_miejsca = np.random.choice(lista_do_pustych_miejsc, ilosc_pustych_miejsc, replace=False)
+one_D_array[puste_miejsca] = 0
+
+
+two_D_array = np.reshape(one_D_array,(N,N))
+print_sudoku(two_D_array)
 
 
 
-# print_sudoku(data)
-# a = np.array([[0, 1, 2, 3],
-#               [2, 3, 0, 1],
-#               [3, 2, 1, 0],
-#               [1, 0, 3, 2]])
-# # print_sudoku(a)
-# print(sprawdz_sudoku(data))
-# print_sudoku(data)
 
 
 
