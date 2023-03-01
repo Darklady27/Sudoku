@@ -31,10 +31,23 @@ def print_sudoku(data: np.ndarray): #iteracja poo numpy array idzie po wierszach
             else:
                 print(cell, end='   |\t')
         print(f"\n{kreski}")
-    
+    #wprowadzanie mozliwosci przez uzytkownika
 
-
-
+def sudoku_solving(data: np.ndarray):
+    while 0 in data:
+        jaki_wiersz = int(input(f"Enter row number:"))
+        i = jaki_wiersz
+        jaka_kolumna = int(input("Enter column number:"))
+        j = jaka_kolumna
+        if data[i][j] == 0:
+            wartosc_uzytkownika = int(input(f"Enter a value in the blank space of the board from 1 to {N}:"))
+            data[i][j] = wartosc_uzytkownika
+            print_sudoku(data)
+        else:
+            print("You can only change empty fields")
+    koniec = bool(input("Do you want to check sudoku (enter True or False):"))
+    if koniec:
+        print(sprawdz_sudoku(data))
 
 def sprawdz_sudoku(data: np.ndarray):
     """
@@ -180,6 +193,9 @@ one_D_array[puste_miejsca] = 0
 
 two_D_array = np.reshape(one_D_array,(N,N))
 print_sudoku(two_D_array)
+sudoku_solving(two_D_array)
+
+
 
 
 
