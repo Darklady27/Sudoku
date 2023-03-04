@@ -68,16 +68,10 @@ def sudoku_solving(data: np.ndarray):
             else:
                 print("You can only change empty fields")
             if not 0 in data:
-                try:
-                    sudoku_complete = input("Do you want to check sudoku (enter Yes or No):")
-                    opcje = ["Yes", "No"]
-                    if sudoku_complete not in opcje:
-                        print("You can only enter Yes or No")
-                        continue
-                    else:
-                        koniec = sudoku_complete == "Yes"
-                except:
-                    print("You can only enter True or False")
+                sudoku_wypelnione =(input("Do you want to check sudoku (enter Yes or No):"))
+                if sudoku_wypelnione == "Yes":
+                    koniec == True
+                else:
                     continue
         except:
             print(f"You can only enter number from {1} to {N}")
@@ -86,9 +80,9 @@ def sudoku_solving(data: np.ndarray):
             sudoku_okej, zly_wiersz, zla_kolmna = sprawdz_sudoku(data)
             if sudoku_okej:
                 print("Good job")
+                koniec = True
             else:
-                print("Sudoku incorrect")
-                koniec = False
+                print("Sudoku niepoprawne")
 
 def sprawdz_sudoku(data: np.ndarray):
     """
